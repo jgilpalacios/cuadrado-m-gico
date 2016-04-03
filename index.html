@@ -45,12 +45,24 @@
     border-style: double;
 }
 
+  *{
+    -webkit-touch-callout: none; /* anula el efecto visual del touch prolongado sobre el objeto */
+
+    user-select: none; /* user-select, hace el objeto no seleccionable */
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* anula el feedback de color al hacer tap en un link */
+    -webkit-tap-highlight-color: transparent; /* similar anterior en algunos android */
+  }
+
 </style>
 <!--<link rel="shortcut icon" href="favicon.gif" />-->
 <script languaje="JavaScript" src="reloj.js"> </script>
 <script src="interact.min.js"></script>
 <script src="cordova.js"></script>
 <SCRIPT LANGUAJE="JAVASCRIPT">
+function onDeviceReady(){};
+document.addEventListener("deviceready",onDeviceReady,false);	
+
 var celdaI=3;
 var celdaJ=3;
 var movimientos=0;
