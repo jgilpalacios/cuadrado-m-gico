@@ -60,7 +60,15 @@
 <script src="interact.min.js"></script>
 <script src="cordova.js"></script>
 <SCRIPT LANGUAJE="JAVASCRIPT">
-function onDeviceReady(){};
+function onDeviceReady(){
+	desordena(); 
+	document.getElementById('t_0_1').innerHTML=llenaConTabla('ca_', tablaDatos0);
+	document.getElementById('t_0_2').innerHTML=llenaConTabla('cb_', tablaDatos1); 
+	document.getElementById('t_0_3').innerHTML=llenaConTabla('cc_', tablaDatos2); 
+	document.getElementById('t_0_4').innerHTML=llenaConTabla('cd_', tablaDatos3); 
+	document.getElementById('t_0_5').innerHTML=llenaConTabla('ce_', tablaDatos4); 
+	document.getElementById('t_0_6').innerHTML=llenaConTabla('cf_', tablaDatos5);
+};
 document.addEventListener("deviceready",onDeviceReady,false);	
 
 var celdaI=3;
