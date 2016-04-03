@@ -44,6 +44,12 @@
     border-color:green;
     border-style: double;
 }
+.celda{
+ 	vertical-align: middle; 
+ 	height: 75px; 
+ 	width: 75px; 
+ 	text-align: center;"
+}
 
   *{
     -webkit-touch-callout: none; /* anula el efecto visual del touch prolongado sobre el objeto */
@@ -162,10 +168,10 @@ function llenaConTabla(id, tablaDatos){
 				var num=""+tablaDatos[i*4+j];
 				if (num==16) num='<br>';//el 16 se deja en blanco
 				res+='<td id="'+id+i+'_'+j+
-					'" bgcolor="#ffffcc" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >'+
+					'" bgcolor="#ffffcc" class="celda" >'+
 					num+'</td>';
 			}else{	res+='<td id="'+id+i+
-				'_'+j+'" bgcolor="#ff9b9b" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >'+
+				'_'+j+'" bgcolor="#ff9b9b" class="celda" >'+
 					tablaDatos[i*4+j]+'</td>';}
 		}
 		res+="</tr>";
@@ -183,10 +189,10 @@ function llenaActiva(id, tablaDatos){
 				var num=""+tablaDatos[i*4+j];
 				if (num==16) num='<br>';//el 16 se deja en blanco
 				res+='<td id="'+id+i+'_'+j+
-					'" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >'+
+					'" bgcolor="#ffff99" class="celda" >'+
 					num+'</td>';
 			}else{	res+='<td id="'+id+i+
-				'_'+j+'" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >'+
+				'_'+j+'" bgcolor="#ff6868" class="celda" >'+
 					tablaDatos[i*4+j]+'</td>';}
 		}
 		res+="</tr>";
@@ -214,7 +220,7 @@ function vuelveCursor(objeto){
 </head>
 <body onload="desordena(); document.getElementById('t_0_1').innerHTML=llenaConTabla('ca_', tablaDatos0); document.getElementById('t_0_2').innerHTML=llenaConTabla('cb_', tablaDatos1); document.getElementById('t_0_3').innerHTML=llenaConTabla('cc_', tablaDatos2); document.getElementById('t_0_4').innerHTML=llenaConTabla('cd_', tablaDatos3); document.getElementById('t_0_5').innerHTML=llenaConTabla('ce_', tablaDatos4); document.getElementById('t_0_6').innerHTML=llenaConTabla('cf_', tablaDatos5);">
 <div id="contenedor" ><div id="t_0_0" class="tablas">
-<table cellpadding="0" cellspacing="0" border="1" ><tbody><tr><td id="c_0_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(0,0);" onmouseover="cambiaCursor(0, 0, this);" onmouseout="vuelveCursor(this);">1</td><td id="c_0_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(0,1)" onmouseover="cambiaCursor(0, 1, this);" onmouseout="vuelveCursor(this);">2</td><td id="c_0_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(0,2)" onmouseover="cambiaCursor(0, 2, this);" onmouseout="vuelveCursor(this);">3</td><td id="c_0_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(0,3)" onmouseover="cambiaCursor(0, 3, this);" onmouseout="vuelveCursor(this);">4</td></tr><tr><td id="c_1_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(1,0)" onmouseover="cambiaCursor(1, 0, this);" onmouseout="vuelveCursor(this);">5</td><td id="c_1_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(1,1)" onmouseover="cambiaCursor(1, 1, this);" onmouseout="vuelveCursor(this);">6</td><td id="c_1_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(1,2)" onmouseover="cambiaCursor(1, 2, this);" onmouseout="vuelveCursor(this);">7</td><td id="c_1_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(1,3);" onmouseover="cambiaCursor(1, 3, this);" onmouseout="vuelveCursor(this);">8</td></tr><tr><td id="c_2_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(2,0);" onmouseover="cambiaCursor(2, 0, this);" onmouseout="vuelveCursor(this);">9</td><td id="c_2_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(2,1);" onmouseover="cambiaCursor(2, 1, this);" onmouseout="vuelveCursor(this);">10</td><td id="c_2_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(2,2);" onmouseover="cambiaCursor(2, 2, this);" onmouseout="vuelveCursor(this);">11</td><td id="c_2_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(2,3);" onmouseover="cambiaCursor(2, 3, this);" onmouseout="vuelveCursor(this);">12</td></tr><tr><td id="c_3_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(3,0);" onmouseover="cambiaCursor(3, 0, this);" onmouseout="vuelveCursor(this);">13</td><td id="c_3_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(3,1);" onmouseover="cambiaCursor(3, 1, this);" onmouseout="vuelveCursor(this);">14</td><td id="c_3_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(3,2);" onmouseover="cambiaCursor(3, 2, this);" onmouseout="vuelveCursor(this);">15</td><td id="c_3_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(3,3);" onmouseover="cambiaCursor(3, 3, this);" onmouseout="vuelveCursor(this);"><br/></td></tr></tbody></table>
+<table cellpadding="0" cellspacing="0" border="1" ><tbody><tr><td id="c_0_0" bgcolor="#ff6868" class="celda" onclick="mueve(0,0);" onmouseover="cambiaCursor(0, 0, this);" onmouseout="vuelveCursor(this);">1</td><td id="c_0_1" bgcolor="#ffff99" class="celda" onclick="mueve(0,1)" onmouseover="cambiaCursor(0, 1, this);" onmouseout="vuelveCursor(this);">2</td><td id="c_0_2" bgcolor="#ff6868" class="celda" onclick="mueve(0,2)" onmouseover="cambiaCursor(0, 2, this);" onmouseout="vuelveCursor(this);">3</td><td id="c_0_3" bgcolor="#ffff99" class="celda" onclick="mueve(0,3)" onmouseover="cambiaCursor(0, 3, this);" onmouseout="vuelveCursor(this);">4</td></tr><tr><td id="c_1_0" bgcolor="#ff6868" class="celda" onclick="mueve(1,0)" onmouseover="cambiaCursor(1, 0, this);" onmouseout="vuelveCursor(this);">5</td><td id="c_1_1" bgcolor="#ffff99" class="celda" onclick="mueve(1,1)" onmouseover="cambiaCursor(1, 1, this);" onmouseout="vuelveCursor(this);">6</td><td id="c_1_2" bgcolor="#ff6868" class="celda" onclick="mueve(1,2)" onmouseover="cambiaCursor(1, 2, this);" onmouseout="vuelveCursor(this);">7</td><td id="c_1_3" bgcolor="#ffff99" class="celda" onclick="mueve(1,3);" onmouseover="cambiaCursor(1, 3, this);" onmouseout="vuelveCursor(this);">8</td></tr><tr><td id="c_2_0" bgcolor="#ff6868" class="celda" onclick="mueve(2,0);" onmouseover="cambiaCursor(2, 0, this);" onmouseout="vuelveCursor(this);">9</td><td id="c_2_1" bgcolor="#ffff99" class="celda" onclick="mueve(2,1);" onmouseover="cambiaCursor(2, 1, this);" onmouseout="vuelveCursor(this);">10</td><td id="c_2_2" bgcolor="#ff6868" class="celda" onclick="mueve(2,2);" onmouseover="cambiaCursor(2, 2, this);" onmouseout="vuelveCursor(this);">11</td><td id="c_2_3" bgcolor="#ffff99" class="celda" onclick="mueve(2,3);" onmouseover="cambiaCursor(2, 3, this);" onmouseout="vuelveCursor(this);">12</td></tr><tr><td id="c_3_0" bgcolor="#ff6868" class="celda" onclick="mueve(3,0);" onmouseover="cambiaCursor(3, 0, this);" onmouseout="vuelveCursor(this);">13</td><td id="c_3_1" bgcolor="#ffff99" class="celda" onclick="mueve(3,1);" onmouseover="cambiaCursor(3, 1, this);" onmouseout="vuelveCursor(this);">14</td><td id="c_3_2" bgcolor="#ff6868" class="celda" onclick="mueve(3,2);" onmouseover="cambiaCursor(3, 2, this);" onmouseout="vuelveCursor(this);">15</td><td id="c_3_3" bgcolor="#ffff99" class="celda" onclick="mueve(3,3);" onmouseover="cambiaCursor(3, 3, this);" onmouseout="vuelveCursor(this);"><br/></td></tr></tbody></table>
 </div><div id="muestra" class="tablas">
 </div><div class="tablas"><span id="tipo"></span><br/>
 movimientos: <span id="movimientos"></span><br/>
