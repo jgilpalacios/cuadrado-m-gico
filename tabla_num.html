@@ -1,0 +1,170 @@
+<html>
+<head>
+<link rel="shortcut icon" href="favicon.gif" /> 
+<script languaje="JavaScript" src="reloj.js"> </script>
+<SCRIPT LANGUAJE="JAVASCRIPT">
+var celdaI=3;
+var celdaJ=3;
+var movimientos=0;
+var jugada=true;
+var tipo;
+function mueve (posI, posJ){
+	if(posI==celdaI && posJ==celdaJ){
+	}else if (posI==celdaI){
+		var paso=1;
+		if(posJ<celdaJ)paso=-1;
+		var iniJ=celdaJ;
+		while(iniJ!=posJ){
+			var aux=document.getElementById('c_'+celdaI+'_'+(iniJ+paso)).innerHTML;
+			document.getElementById('c_'+celdaI+'_'+(iniJ)).innerHTML=aux;
+			if(aux%2==0){
+				document.getElementById('c_'+celdaI+'_'+(iniJ)).style.backgroundColor='#ffff99';
+			}else{
+				document.getElementById('c_'+celdaI+'_'+(iniJ)).style.backgroundColor='#ff6868';
+			}
+			iniJ+=paso;
+		}
+		celdaJ=posJ;
+		document.getElementById('c_'+celdaI+'_'+celdaJ).style.backgroundColor='#ffff99';
+		document.getElementById('c_'+celdaI+'_'+celdaJ).innerHTML='<br>';
+		if (jugada){
+		 	movimientos++;
+			document.getElementById('movimientos').innerHTML=''+movimientos;
+		}
+		
+	}else if (posJ==celdaJ){
+		var paso=1;
+		if(posI<celdaI)paso=-1;
+		var iniI=celdaI;
+		while(iniI!=posI){
+			var aux=document.getElementById('c_'+(iniI+paso)+'_'+celdaJ).innerHTML;
+			document.getElementById('c_'+iniI+'_'+celdaJ).innerHTML=aux;
+			if(aux%2==0){
+				document.getElementById('c_'+iniI+'_'+celdaJ).style.backgroundColor='#ffff99';
+			}else{
+				document.getElementById('c_'+iniI+'_'+celdaJ).style.backgroundColor='#ff6868';
+			}
+			iniI+=paso;
+		}
+		celdaI=posI;
+		document.getElementById('c_'+celdaI+'_'+celdaJ).style.backgroundColor='#ffff99';
+		document.getElementById('c_'+celdaI+'_'+celdaJ).innerHTML='<br>';
+		if (jugada){
+		 	movimientos++;
+			document.getElementById('movimientos').innerHTML=''+movimientos;
+		}
+	}else{
+	}
+	if (jugada) comprueba();
+}
+function desordena(){
+	document.getElementById('movimientos').innerHTML=''+movimientos;
+	jugada=false;//para no contar movimientos
+	for (var i=0;i<20;i++){
+		mueve (celdaI, Math.floor(4*Math.random()));
+		mueve (Math.floor(4*Math.random()),celdaJ);
+	}
+	jugada=true;//para volver a contar movimientos
+}
+function comprueba(){
+	var finaliza=true;
+	for(var i=0; i<4; i++)
+		for(var j=0; j<4; j++)
+			if(document.getElementById(tipo+i+"_"+j).innerHTML!=document.getElementById('c_'+i+"_"+j).innerHTML){
+			finaliza=false;
+			break;
+		}
+	if(finaliza) para();//se detine el reloj
+}
+var tablaDatos0=new Array('1','2','3','4', '5', '6','7','8','9','10','11','12','13','14','15','16');
+var tablaDatos1=new Array(1,2,3,4,12,13,14,5,11,16,15,6,10,9,8,7);
+var tablaDatos2=new Array(3,14,13,16,8,5,6,11,4,9,10,7,15,2,1,12);
+///
+var tablaDatos3=new Array(1,5,9,13,2,6,10,14,3,7,11,15,4,8,12,16);
+var tablaDatos4=new Array(7,8,9,10,6,1,2,11,5,4,3,12,16,15,14,13);
+var tablaDatos5=new Array(16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1);
+
+function llenaConTabla(id, tablaDatos){
+	var res='<table cellpadding="0" cellspacing="0" border="1" ><tbody>';
+	for(var i=0; i<4; i++){
+		res+='<tr>';
+		for(var j=0; j<4; j++){
+			//alert(tablaDatos[i*4+j])
+			if((tablaDatos[i*4+j]%2)==0){
+				var num=""+tablaDatos[i*4+j];
+				if (num==16) num='<br>';//el 16 se deja en blanco
+				res+='<td id="'+id+i+'_'+j+
+					'" bgcolor="#ffffcc" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >'+
+					num+'</td>';
+			}else{	res+='<td id="'+id+i+
+				'_'+j+'" bgcolor="#ff9b9b" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >'+
+					tablaDatos[i*4+j]+'</td>';}
+		}
+		res+="</tr>";
+	}
+	res+='</tbody></table>';
+	//alert(res);
+	return res;
+}
+function llenaActiva(id, tablaDatos){
+	var res='<table cellpadding="0" cellspacing="0" border="1" ><tbody>';
+	for(var i=0; i<4; i++){
+		res+='<tr>';
+		for(var j=0; j<4; j++){
+			if((tablaDatos[i*4+j]%2)==0){
+				var num=""+tablaDatos[i*4+j];
+				if (num==16) num='<br>';//el 16 se deja en blanco
+				res+='<td id="'+id+i+'_'+j+
+					'" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >'+
+					num+'</td>';
+			}else{	res+='<td id="'+id+i+
+				'_'+j+'" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >'+
+					tablaDatos[i*4+j]+'</td>';}
+		}
+		res+="</tr>";
+	}
+	res+='</tbody></table>';
+	//alert(res);
+	return res;
+}
+function cambiaCursor(posI, posJ, objeto){
+	if(posI==celdaI && posJ==celdaJ){
+		objeto.style.cursor = 'crosshair';
+	}else if (posI==celdaI){
+		if(posJ<celdaJ) objeto.style.cursor = 'e-resize';
+		else objeto.style.cursor = 'w-resize';		
+	}else if (posJ==celdaJ){
+		if(posI<celdaI) objeto.style.cursor = 's-resize';
+		else objeto.style.cursor = 'n-resize';
+	}else{
+	}
+}
+function vuelveCursor(objeto){
+	objeto.style.cursor = 'default';
+}
+</SCRIPT>
+</head>
+<body onload="desordena(); document.getElementById('t_0_1').innerHTML=llenaConTabla('ca_', tablaDatos0); document.getElementById('t_0_2').innerHTML=llenaConTabla('cb_', tablaDatos1); document.getElementById('t_0_3').innerHTML=llenaConTabla('cc_', tablaDatos2); document.getElementById('t_0_4').innerHTML=llenaConTabla('cd_', tablaDatos3); document.getElementById('t_0_5').innerHTML=llenaConTabla('ce_', tablaDatos4); document.getElementById('t_0_6').innerHTML=llenaConTabla('cf_', tablaDatos5);">
+<table cellpadding="0" cellspacing="0" border="1" ><tbody><tr><td id="t_0_0" bgcolor="#ff6868" style="vertical-align: middle; height: 200px; width: 200px; text-align: center;">
+<table cellpadding="0" cellspacing="0" border="1" ><tbody><tr><td id="c_0_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(0,0);" onmouseover="cambiaCursor(0, 0, this);" onmouseout="vuelveCursor(this);">1</td><td id="c_0_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(0,1)" onmouseover="cambiaCursor(0, 1, this);" onmouseout="vuelveCursor(this);">2</td><td id="c_0_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(0,2)" onmouseover="cambiaCursor(0, 2, this);" onmouseout="vuelveCursor(this);">3</td><td id="c_0_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(0,3)" onmouseover="cambiaCursor(0, 3, this);" onmouseout="vuelveCursor(this);">4</td></tr><tr><td id="c_1_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(1,0)" onmouseover="cambiaCursor(1, 0, this);" onmouseout="vuelveCursor(this);">5</td><td id="c_1_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(1,1)" onmouseover="cambiaCursor(1, 1, this);" onmouseout="vuelveCursor(this);">6</td><td id="c_1_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(1,2)" onmouseover="cambiaCursor(1, 2, this);" onmouseout="vuelveCursor(this);">7</td><td id="c_1_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(1,3);" onmouseover="cambiaCursor(1, 3, this);" onmouseout="vuelveCursor(this);">8</td></tr><tr><td id="c_2_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(2,0);" onmouseover="cambiaCursor(2, 0, this);" onmouseout="vuelveCursor(this);">9</td><td id="c_2_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(2,1);" onmouseover="cambiaCursor(2, 1, this);" onmouseout="vuelveCursor(this);">10</td><td id="c_2_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(2,2);" onmouseover="cambiaCursor(2, 2, this);" onmouseout="vuelveCursor(this);">11</td><td id="c_2_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(2,3);" onmouseover="cambiaCursor(2, 3, this);" onmouseout="vuelveCursor(this);">12</td></tr><tr><td id="c_3_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(3,0);" onmouseover="cambiaCursor(3, 0, this);" onmouseout="vuelveCursor(this);">13</td><td id="c_3_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(3,1);" onmouseover="cambiaCursor(3, 1, this);" onmouseout="vuelveCursor(this);">14</td><td id="c_3_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(3,2);" onmouseover="cambiaCursor(3, 2, this);" onmouseout="vuelveCursor(this);">15</td><td id="c_3_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" onclick="mueve(3,3);" onmouseover="cambiaCursor(3, 3, this);" onmouseout="vuelveCursor(this);"><br/></td></tr></tbody></table>
+</td><td id="t_0_1" bgcolor="#ffa8a8" style="vertical-align: middle; height: 200px; width: 200px; text-align: center;" onclick="tipo='ca_';document.getElementById('tipo').innerHTML='ORDENADO';tinicial(); set('reloj'); c_reloj(); document.getElementById('t_0_1').innerHTML=llenaActiva('ca_', tablaDatos0);" onmouseover="this.style.cursor = 'hand';" onmouseout="this.style.cursor = 'default';">
+<!--
+<table cellpadding="0" cellspacing="0" border="1" ><tbody><tr><td id="ca_0_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;" >1</td><td id="ca_0_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">2</td><td id="ca_0_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">3</td><td id="ca_0_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">4</td></tr><tr><td id="ca_1_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">5</td><td id="ca_1_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">6</td><td id="ca_1_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">7</td><td id="ca_1_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">8</td></tr><tr><td id="ca_2_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">9</td><td id="ca_2_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">10</td><td id="ca_2_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">11</td><td id="ca_2_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">12</td></tr><tr><td id="ca_3_0" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">13</td><td id="ca_3_1" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">14</td><td id="ca_3_2" bgcolor="#ff6868" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;">15</td><td id="ca_3_3" bgcolor="#ffff99" style="vertical-align: middle; height: 50px; width: 50px; text-align: center;"><br/></td></tr></tbody></table>
+-->
+
+</td><td id="t_0_2" bgcolor="#ffa8a8" style="vertical-align: middle; height: 200px; width: 200px; text-align: center;" onclick="tipo='cb_';document.getElementById('tipo').innerHTML='ESPIRAL ADENTRO';tinicial(); set('reloj'); c_reloj(); document.getElementById('t_0_2').innerHTML=llenaActiva('cb_', tablaDatos1);" onmouseover="this.style.cursor = 'hand';" onmouseout="this.style.cursor = 'default';">
+</td><td id="t_0_3" bgcolor="#ffa8a8" style="vertical-align: middle; height: 200px; width: 200px; text-align: center;" onclick="tipo='cc_';document.getElementById('tipo').innerHTML='CUADRADO M&Aacute;GICO';tinicial(); set('reloj'); c_reloj(); document.getElementById('t_0_3').innerHTML=llenaActiva('cc_', tablaDatos2);" onmouseover="this.style.cursor = 'hand';" onmouseout="this.style.cursor = 'default';">
+</td></tr>
+<tr><td id="t_0_4" bgcolor="#ffa8a8" style="vertical-align: middle; height: 200px; width: 200px; text-align: center;" onclick="tipo='cd_';document.getElementById('tipo').innerHTML='VERTICAL';tinicial(); set('reloj'); c_reloj(); document.getElementById('t_0_4').innerHTML=llenaActiva('cd_', tablaDatos3);" onmouseover="this.style.cursor = 'hand';" onmouseout="this.style.cursor = 'default';">
+</td>
+<td id="t_0_5" bgcolor="#ffa8a8" style="vertical-align: middle; height: 200px; width: 200px; text-align: center;" onclick="tipo='ce_';document.getElementById('tipo').innerHTML='ESPIRAL AFUERA';tinicial(); set('reloj'); c_reloj(); document.getElementById('t_0_5').innerHTML=llenaActiva('ce_', tablaDatos4);" onmouseover="this.style.cursor = 'hand';" onmouseout="this.style.cursor = 'default';">
+</td>
+<td id="t_0_6" bgcolor="#ffa8a8" style="vertical-align: middle; height: 200px; width: 200px; text-align: center;" onclick="tipo='cf_';document.getElementById('tipo').innerHTML='DECRECIENTE';tinicial(); set('reloj'); c_reloj(); document.getElementById('t_0_6').innerHTML=llenaActiva('cf_', tablaDatos5);" onmouseover="this.style.cursor = 'hand';" onmouseout="this.style.cursor = 'default';">
+</td><td id="t_0_1" bgcolor="r#bbaaaa;" style="vertical-align: middle; height: 200px; width: 200px; text-align: center;">
+<span id="tipo"></span><br/>
+movimientos: <span id="movimientos"></span><br/>
+<span id="reloj"></span>
+</td></tr>
+</tbody></table>
+</html>
+
